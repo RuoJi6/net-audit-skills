@@ -121,6 +121,10 @@ ilspycmd --help
 
 ![代码审计培训推荐](assets/WechatIMG3380.jpg)
 
+## 审计skills系列
+
+- [java-audit-skills](https://github.com/RuoJi6/java-audit-skills) - Java 代码审计 Claude Skills 集合
+
 ## 相关链接
 
 - [ILSpy](https://github.com/icsharpcode/ILSpy) - .NET 反编译器
