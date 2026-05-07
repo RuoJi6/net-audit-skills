@@ -117,6 +117,10 @@ ilspycmd --help
 - [ ] **net-route-tracer**：ASP.NET 路由多层级调用链追踪工具
 - [ ] **net-audit-pipeline**：.NET 全链路自动化安全审计流水线（agent teams 编排）
 
+## 代码审计培训推荐(备注申请：弱鸡推荐)
+
+![代码审计培训推荐](assets/WechatIMG3380.jpg)
+
 ## 相关链接
 
 - [ILSpy](https://github.com/icsharpcode/ILSpy) - .NET 反编译器
