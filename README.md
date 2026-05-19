@@ -9,6 +9,7 @@
 ## 功能特性
 
 - **自动路由识别**：自动识别 ASP.NET Web 项目中的 HTTP 路由结构
+- **鉴权机制审计**：梳理登录校验、权限校验、角色/Policy、资源级授权与越权风险
 - **多框架支持**：支持 ASP.NET MVC 5 及以下、ASP.NET Core (.NET 5/6/7+)、ASP.NET Web Forms、Web API 2、最小 API 等主流框架
 - **参数结构解析**：提取 Query / Form / Body / Path / Header / Cookie / RouteValue 等各类参数
 - **反编译集成**：集成 .NET 反编译器（ILSpy / ilspycmd），支持分析闭源 `.dll` / `.exe` 程序集
@@ -16,7 +17,7 @@
 - **接口文档生成**：为无 API 文档的项目生成接口清单
 - **完整输出保证**：必须输出所有发现的接口，不允许省略
 
-> 当前已发布 **net-route-mapper**；鉴权审计、SQL 注入审计、文件上传 / 读取审计、XXE 审计、组件漏洞扫描及全链路审计流水线等 skill 正在规划中（详见末尾 TODO）。
+> 当前已发布 **net-route-mapper** 与 **net-auth-audit**；SQL 注入审计、文件上传 / 读取审计、XXE 审计、组件漏洞扫描及全链路审计流水线等 skill 正在规划中（详见末尾 TODO）。
 
 ## 前置要求
 
@@ -34,14 +35,25 @@
 net-audit-skills/
 ├── README.md                   # 项目说明文档
 └── skills/                     # Skills 集合目录
-    └── net-route-mapper/       # ASP.NET 路由与参数映射工具
+    ├── net-shared/             # .NET 审计共享标准
+    │   └── SEVERITY_RATING.md  # 漏洞编号与 R/I/C 评分标准
+    ├── net-route-mapper/       # ASP.NET 路由与参数映射工具
+    │   ├── SKILL.md
+    │   └── references/
+    │       ├── ASPNET_CORE.md         # ASP.NET Core 路由识别参考
+    │       ├── ASPNET_MVC5.md         # ASP.NET MVC 5 路由识别参考
+    │       ├── ASPNET_WEBFORMS.md     # ASP.NET Web Forms 路由识别参考
+    │       ├── DECOMPILE_STRATEGY.md  # 共享二进制预处理 / 反编译策略
+    │       └── OUTPUT_TEMPLATE.md     # 输出模板
+    └── net-auth-audit/         # ASP.NET 鉴权机制审计工具
         ├── SKILL.md
         └── references/
-            ├── ASPNET_CORE.md         # ASP.NET Core 路由识别参考
-            ├── ASPNET_MVC5.md         # ASP.NET MVC 5 路由识别参考
-            ├── ASPNET_WEBFORMS.md     # ASP.NET Web Forms 路由识别参考
-            ├── DECOMPILE_STRATEGY.md  # 反编译策略
-            └── OUTPUT_TEMPLATE.md     # 输出模板
+            ├── AUTH_PATTERNS.md       # .NET 鉴权入口识别参考
+            ├── EVAL_CASES.md          # 触发边界与失败案例评测样例
+            ├── IDOR_CHECKLIST.md      # 水平越权 / 资源归属检查清单
+            ├── OUTPUT_TEMPLATE_MAIN.md
+            ├── OUTPUT_TEMPLATE_MAPPING.md
+            └── OUTPUT_TEMPLATE_README.md
 ```
 
 ## 可用 Skills
@@ -49,6 +61,7 @@ net-audit-skills/
 | Skill              | 说明                                       |
 | ------------------ | ------------------------------------------ |
 | net-route-mapper   | ASP.NET 源码路由与参数映射分析工具         |
+| net-auth-audit     | ASP.NET 鉴权机制、权限校验与越权风险审计工具 |
 
 ## 安装与使用
 
@@ -72,11 +85,14 @@ ilspycmd --help
 
 ```
 /net-route-mapper /path/to/project
+/net-auth-audit /path/to/project
 ```
 
 **参数说明：**
 
 - `/path/to/project` - .NET 项目根目录，包含源码（`.cs` / `.aspx`）或编译产物（`bin/*.dll`）
+- `net-auth-audit` 可复用 `net-route-mapper` 输出和 `{project}_audit/decompiled/manifest.json` 共享反编译产物
+- `net-auth-audit` 输出固定保存到 `{project}_audit/auth_audit/`，包含 `README.md`、`auth_mapping.md`、`auth_findings.md` 和 `modules/`
 
 **项目路径要求：**
 
@@ -112,7 +128,6 @@ ilspycmd --help
 
 ## TODO 待办列表
 
-- [ ] **net-auth-audit**：ASP.NET 鉴权机制审计工具（Forms Auth / JWT / Identity / 自定义中间件）
 - [ ] **net-sql-audit**：ASP.NET SQL 注入漏洞审计工具（ADO.NET / Dapper / EF Core）
 - [ ] **net-file-upload-audit**：ASP.NET 文件上传漏洞审计工具
 - [ ] **net-file-read-audit**：ASP.NET 文件读取漏洞审计工具
