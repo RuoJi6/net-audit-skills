@@ -24,7 +24,12 @@
 - 项目类型: ASP.NET Core 6 / ASP.NET MVC 5 / Web Forms / 混合
 - 入口程序集: WebApplication1.dll
 - 路由载体: Program.cs / RouteConfig.cs / Global.asax
-- 反编译产物: decompiled/
+- 源码使用: 是 / 否 / 部分
+- 反混淆产物: 无 / ../deobfuscated/
+- 反混淆声明: 无 / ../deobfuscated/DEOBFUSCATE_MANIFEST.md
+- 反编译产物: 无 / ../decompiled/
+- 反编译声明: 无 / ../decompiled/DECOMPILE_MANIFEST.md
+- 二进制处理状态: success / partial / failed / skipped
 
 ## 鉴权概览
 - 全局过滤器: 无 / [Authorize] (FilterConfig)
@@ -193,6 +198,9 @@ URL 路径: /UserSvc.asmx/Login
 - [x] 所有 RegisterRoutes / MapRoute / MapPageRoute / MapControllerRoute / MapGet 已覆盖
 - [x] 所有 Controller / Action 已枚举
 - [x] 所有 .aspx / .ashx / .asmx 已枚举
+- [x] 闭源项目已生成/复用反混淆 manifest（未混淆时说明跳过原因）
+- [x] 闭源项目已生成/复用反编译 manifest
+- [x] 失败或跳过程序集已记录
 - [x] 所有路由含参数行与鉴权标注
 - [x] 路由总数 = routes_index.md 行数 = 各模块路由数之和
 - [x] 未输出 HTTP / Burp 请求模板（按规范禁止）
