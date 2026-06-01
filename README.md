@@ -1,10 +1,10 @@
 ## 审计skills系列
 
-### 推荐阅读
-
-- [Skill 约束悖论](https://ruoji6.github.io/posts/14856.html) - AI 使用 skill 进行代码审计时的约束、覆盖率与自主式全量审计思考
-
 - [java-audit-skills](https://github.com/RuoJi6/java-audit-skills) - Java 代码审计 Claude Skills 集合
+
+## 推荐阅读
+
+- [Skill 约束悖论](https://ruoji6.github.io/posts/14856.html) - 理解 skill 在 AI 代码审计中的能力边界，以及全量自主审计与自主式深度推理的配合方式
 
 # .NET Audit Skills
 
